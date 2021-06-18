@@ -1,0 +1,129 @@
+{
+  "version": 2,
+  "projects": {
+    "moonmoods-client": {
+      "root": "apps/moonmoods-client",
+      "sourceRoot": "apps/moonmoods-client/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/moonmoods-client",
+            "index": "apps/moonmoods-client/src/index.html",
+            "main": "apps/moonmoods-client/src/main.tsx",
+            "polyfills": "apps/moonmoods-client/src/polyfills.ts",
+            "tsConfig": "apps/moonmoods-client/tsconfig.app.json",
+            "assets": [
+              "apps/moonmoods-client/src/favicon.ico",
+              "apps/moonmoods-client/src/assets"
+            ],
+            "styles": ["apps/moonmoods-client/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/moonmoods-client/src/environments/environment.ts",
+                  "with": "apps/moonmoods-client/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "moonmoods-client:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "moonmoods-client:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/moonmoods-client/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/moonmoods-client"],
+          "options": {
+            "jestConfig": "apps/moonmoods-client/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "moonmoods-client-e2e": {
+      "root": "apps/moonmoods-client-e2e",
+      "sourceRoot": "apps/moonmoods-client-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/moonmoods-client-e2e/cypress.json",
+            "tsConfig": "apps/moonmoods-client-e2e/tsconfig.e2e.json",
+            "devServerTarget": "moonmoods-client:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "moonmoods-client:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/moonmoods-client-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "strict": true,
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint",
+        "strict": true
+      }
+    }
+  },
+  "defaultProject": "moonmoods-client"
+}

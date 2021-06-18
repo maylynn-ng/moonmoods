@@ -1,0 +1,30 @@
+{
+  "npmScope": "moonmoods",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "projects": {
+    "moonmoods-client": {
+      "tags": []
+    },
+    "moonmoods-client-e2e": {
+      "tags": [],
+      "implicitDependencies": ["moonmoods-client"]
+    }
+  }
+}
